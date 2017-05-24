@@ -32,6 +32,7 @@
 					<td>Latitude</td>
 					<td>Longitude</td>
 					<td>Distanz</td>
+					<td>Kurs</td>
 				</thead>
 				<xsl:for-each select="/gpx/wpt">
 					<tr>
@@ -44,7 +45,9 @@
 						<td id="distance">
 							<script>
 								distance(49, 10);
-							</script><!--<button type="button" onclick='distance(lat, lon)'>Klick mich!</button>--></td>
+							</script><!--<button type="button" onclick='distance(lat, lon)'>Klick mich!</button>-->
+						</td>
+						<td></td>
 					</tr>
 				</xsl:for-each>
 			</table>
