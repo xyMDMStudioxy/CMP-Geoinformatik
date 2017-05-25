@@ -42,19 +42,18 @@
 						<td><xsl:value-of select="name"/></td>
 						<td><xsl:value-of select="$lat"/></td>
 						<td><xsl:value-of select="$lon"/></td>
-						<td id="distance">
+						<td id="distance{position()}">
 							<script>
-								distance(49, 10);
-							</script><!--<button type="button" onclick='distance(lat, lon)'>Klick mich!</button>-->
+								var lat = <xsl:value-of select="$lat"/>;
+								var lon = <xsl:value-of select="$lon"/>;
+								var i = <xsl:value-of select="position()"/>
+								var km = distance(48.84075409497385, 10.066720502099543, lat, lon, i);	
+							</script>
 						</td>
 						<td></td>
 					</tr>
 				</xsl:for-each>
 			</table>
-			<div id="aktPosition">
-				<p>Aktuelle Position</p>
-			</div>
-			
 		</div>
 	</body>
 	</html>

@@ -1,4 +1,4 @@
-function distance(target_lat, target_lon) {
+function distance(lat1, lng1, lat2, lng2, i) {
 	navigator.geolocation.getCurrentPosition(function(position) {
 		initialize(position.coords);
 		}, function() {
@@ -18,18 +18,18 @@ function distance(target_lat, target_lon) {
 		map: map,
 		title: 'Hier sind wir'
 	});
-	document.getElementById("aktPosition").innerHTML = "Breitengrad: " + coords.latitude + " und Längengrad: " + coords.longitude;
-	var pi80 = 3.1415 / 180;
-	coords.latitude *= pi80;
-	coords.longitude *= pi80;
-	target_lat *= pi80;
-	target_lon *= pi80;
-	var r = 6372.797;
-	var dlat = target_lat - coords.latitude;
-	var dlng = target_lon - coords.longitude;
-	var a = Math.sin(dlat / 2) * Math.sin(dlat / 2) + Math.cos(coords.latitude) * Math.cos(target_lat) * Math.sin(dlng / 2) * Math.sin(dlng / 2);
+	var pi80 = 3.14159265359 / 180;
+	lat1 *= pi80;
+	lng1 *= pi80;
+	lat2 *= pi80;
+	lng2 *= pi80;
+	var r = 6372.797; 
+	var dlat = lat2 - lat1;
+	var dlng = lng2 - lng1;
+	var a = Math.sin(dlat / 2) * Math.sin(dlat / 2) + Math.cos(lat1) * Math.cos(lng1) * Math.sin(dlng / 2) * Math.sin(dlng / 2);
 	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-	var km = r * c / 1000;
-	document.getElementById("distance").innerHTML = km;
+	var km = r * c;
+	document.getElementById("distance" + i.toString()).innerHTML = km;
+	return km;
 	}
 }
