@@ -16,6 +16,10 @@
 			<!-- JS GoogleMaps Einbindung -->
 			<script src="http://maps.google.com/maps/api/js?sensor=true"></script>
 			<script src="js/googlemaps.js"></script>
+			<script>
+				var tmp;
+				var kmDistance = [];
+			</script>
 		</head>
 		<body>
 		<!-- Google Maps -->
@@ -42,18 +46,21 @@
 						<td><xsl:value-of select="name"/></td>
 						<td><xsl:value-of select="$lat"/></td>
 						<td><xsl:value-of select="$lon"/></td>
-						<td id="distance{position()}">
+						<td id="distance">
 							<script>
 								var lat = <xsl:value-of select="$lat"/>;
 								var lon = <xsl:value-of select="$lon"/>;
-								var i = <xsl:value-of select="position()"/>
-								var km = distance(48.84075409497385, 10.066720502099543, lat, lon, i);	
+								var i = <xsl:value-of select="position()"/>								
+								var km = distance(48.84075409497385, 10.066720502099543, lat, lon, kmDistance, i);
 							</script>
 						</td>
 						<td></td>
 					</tr>
 				</xsl:for-each>
 			</table>
+			<ul>
+				<li id="test"></li>
+			</ul>
 		</div>
 	</body>
 	</html>

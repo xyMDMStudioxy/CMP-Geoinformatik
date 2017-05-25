@@ -3,7 +3,10 @@
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
       <meta charset="UTF-8">
       <title>Geoformate</title>
-      <link rel="stylesheet" href="css/layout.css"><script src="http://maps.google.com/maps/api/js?sensor=true"></script><script src="js/googlemaps.js"></script></head>
+      <link rel="stylesheet" href="css/layout.css"><script src="http://maps.google.com/maps/api/js?sensor=true"></script><script src="js/googlemaps.js"></script><script>
+				var tmp;
+				var kmDistance = [];
+			</script></head>
    <body>
       <div id="pos">
          <p>Deine Position wird ermittelt...</p>
@@ -20,11 +23,11 @@
                <td>Marcel Home</td>
                <td>48.7678555</td>
                <td>9.825188300000036</td>
-               <td id="distance1"><script>
+               <td id="distance"><script>
 								var lat = 48.7678555;
 								var lon = 9.825188300000036;
-								var i = 1
-								var km = distance(48.84075409497385, 10.066720502099543, lat, lon, i);	
+								var i = 1								
+								var km = distance(48.84075409497385, 10.066720502099543, lat, lon, kmDistance, i);
 							</script></td>
                <td></td>
             </tr>
@@ -32,11 +35,11 @@
                <td>Anna Home</td>
                <td>49.09648</td>
                <td>10.461070000000063</td>
-               <td id="distance2"><script>
+               <td id="distance"><script>
 								var lat = 49.09648;
 								var lon = 10.461070000000063;
-								var i = 2
-								var km = distance(48.84075409497385, 10.066720502099543, lat, lon, i);	
+								var i = 2								
+								var km = distance(48.84075409497385, 10.066720502099543, lat, lon, kmDistance, i);
 							</script></td>
                <td></td>
             </tr>
@@ -44,11 +47,11 @@
                <td>Nadja Home</td>
                <td>48.7835368</td>
                <td>9.781901999999945</td>
-               <td id="distance3"><script>
+               <td id="distance"><script>
 								var lat = 48.7835368;
 								var lon = 9.781901999999945;
-								var i = 3
-								var km = distance(48.84075409497385, 10.066720502099543, lat, lon, i);	
+								var i = 3								
+								var km = distance(48.84075409497385, 10.066720502099543, lat, lon, kmDistance, i);
 							</script></td>
                <td></td>
             </tr>
@@ -56,11 +59,11 @@
                <td>Burren</td>
                <td>48.84075409497385</td>
                <td>10.066720502099543</td>
-               <td id="distance4"><script>
+               <td id="distance"><script>
 								var lat = 48.84075409497385;
 								var lon = 10.066720502099543;
-								var i = 4
-								var km = distance(48.84075409497385, 10.066720502099543, lat, lon, i);	
+								var i = 4								
+								var km = distance(48.84075409497385, 10.066720502099543, lat, lon, kmDistance, i);
 							</script></td>
                <td></td>
             </tr>
@@ -68,15 +71,18 @@
                <td>Berlin Siegessäule</td>
                <td>52.5145343</td>
                <td>13.350118899999984</td>
-               <td id="distance5"><script>
+               <td id="distance"><script>
 								var lat = 52.5145343;
 								var lon = 13.350118899999984;
-								var i = 5
-								var km = distance(48.84075409497385, 10.066720502099543, lat, lon, i);	
+								var i = 5								
+								var km = distance(48.84075409497385, 10.066720502099543, lat, lon, kmDistance, i);
 							</script></td>
                <td></td>
             </tr>
          </table>
+         <ul>
+            <li id="test"></li>
+         </ul>
       </div>
    </body>
 </html>
