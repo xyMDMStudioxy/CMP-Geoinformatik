@@ -35,7 +35,6 @@
 					<td>Name</td>
 					<td>Latitude</td>
 					<td>Longitude</td>
-					<td>Distanz</td>
 					<td>Kurs</td>
 				</thead>
 				<xsl:for-each select="/gpx/wpt">
@@ -46,20 +45,17 @@
 						<td><xsl:value-of select="name"/></td>
 						<td><xsl:value-of select="$lat"/></td>
 						<td><xsl:value-of select="$lon"/></td>
-						<td id="distance">
-							<script>
-								var lat = <xsl:value-of select="$lat"/>;
-								var lon = <xsl:value-of select="$lon"/>;
-								var i = <xsl:value-of select="position()"/>								
-								var km = distance(48.84075409497385, 10.066720502099543, lat, lon, kmDistance, i);
-							</script>
-						</td>
+						<script>
+							var lat = <xsl:value-of select="$lat"/>;
+							var lon = <xsl:value-of select="$lon"/>;							
+							distance(48.84075409497385, 10.066720502099543, lat, lon, kmDistance);
+						</script>
 						<td></td>
 					</tr>
 				</xsl:for-each>
 			</table>
 			<ul>
-				<li id="test"></li>
+				<li id="distance"></li>
 			</ul>
 		</div>
 	</body>

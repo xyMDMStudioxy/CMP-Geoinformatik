@@ -1,4 +1,4 @@
-function distance(lat1, lng1, lat2, lng2, kmDistance, i) {
+function distance(lat1, lng1, lat2, lng2, kmDistance) {
 	navigator.geolocation.getCurrentPosition(function(position) {
 		initialize(position.coords);
 		}, function() {
@@ -29,9 +29,8 @@ function distance(lat1, lng1, lat2, lng2, kmDistance, i) {
 	var a = Math.sin(dlat / 2) * Math.sin(dlat / 2) + Math.cos(lat1) * Math.cos(lng1) * Math.sin(dlng / 2) * Math.sin(dlng / 2);
 	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 	var km = r * c;
-	alert(km);
 	tmp = kmDistance.push(km);
 	kmDistance.sort(function(a, b){return a - b});
-	document.getElementById("test").innerHTML = kmDistance;
-	}	
+	document.getElementById("distance").innerHTML = kmDistance;
+	}
 }
