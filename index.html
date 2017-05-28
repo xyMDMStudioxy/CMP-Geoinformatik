@@ -2,154 +2,185 @@
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
       <title>Geolocation</title>
-   </head>
+      <link rel="stylesheet" href="css/style.css"><script src="http://maps.google.com/maps/api/js?sensor=true"></script></head>
    <body>
-      <div id="aktuelle_pos">
-         <p>Aktuelle Position wird bestimmt...</p>
-      </div><script>
-			var kmDistance = [];
-
-			navigator.geolocation.getCurrentPosition(function(position) {
-				document.getElementById('aktuelle_pos').innerHTML = 'Aktuelle Position Latitude: ' + position.coords.latitude + ' / Longitude: ' + position.coords.longitude;
-			}, function() {
-				document.getElementById('aktuelle_pos').innerHTML = 'Deine aktuelle Position konnte nicht bestimmt werden.';
-			});
-
-			function distance(lat1, lng1, lat2, lng2, i) {
-				var pi80 = 3.14159265359 / 180;
-				lat1 *= pi80;
-				lng1 *= pi80;
-				lat2 *= pi80;
-				lng2 *= pi80;
-				var r = 6372.797; 
-				var dlat = lat2 - lat1;
-				var dlng = lng2 - lng1;
-				var a = Math.sin(dlat / 2) * Math.sin(dlat / 2) + Math.cos(lat1) * Math.cos(lng1) * Math.sin(dlng / 2) * Math.sin(dlng / 2);
-				var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-				var km = r * c;
-				document.getElementById('distance' + i.toString()).innerHTML = km;
-				return km;
-			}
-
-			function distance_sort(lat1, lng1, lat2, lng2, kmDistance, i) {
-				document.getElementById('distance_sort' + i.toString()).innerHTML = kmDistance[i-1];
-				var kurs = (Math.sin(lat2) - Math.sin(lat1) * Math.cos(kmDistance[i-1])) / (Math.cos(lat1) * Math.sin(kmDistance[i-1]));
-				kurs = Math.cos(kurs) * 100;
-				document.getElementById('kurs' + i.toString()).innerHTML = kurs;
-			}
-		</script><div id="waypoints_info">
-         <table border="1">
-            <thead>
-               <td>Name</td>
-               <td>Längengrad</td>
-               <td>Breitengrad</td>
-               <td>Distanz</td>
-            </thead>
-            <tr>
-               <td>Marcel Home</td>
-               <td>48.7678555</td>
-               <td>9.825188300000036</td>
-               <td id="distance1"></td><script>
-						var lat = 48.7678555;
-						var lng = 9.825188300000036;
-						var i = 1;
-						var km = distance(48.7678555, 9.825188300000036, lat, lng, i);
-						kmDistance.push(km);
-					</script></tr>
-            <tr>
-               <td>Anna Home</td>
-               <td>49.09648</td>
-               <td>10.461070000000063</td>
-               <td id="distance2"></td><script>
-						var lat = 49.09648;
-						var lng = 10.461070000000063;
-						var i = 2;
-						var km = distance(48.7678555, 9.825188300000036, lat, lng, i);
-						kmDistance.push(km);
-					</script></tr>
-            <tr>
-               <td>Nadja Home</td>
-               <td>48.7835368</td>
-               <td>9.781901999999945</td>
-               <td id="distance3"></td><script>
-						var lat = 48.7835368;
-						var lng = 9.781901999999945;
-						var i = 3;
-						var km = distance(48.7678555, 9.825188300000036, lat, lng, i);
-						kmDistance.push(km);
-					</script></tr>
-            <tr>
-               <td>Burren</td>
-               <td>48.84075409497385</td>
-               <td>10.066720502099543</td>
-               <td id="distance4"></td><script>
-						var lat = 48.84075409497385;
-						var lng = 10.066720502099543;
-						var i = 4;
-						var km = distance(48.7678555, 9.825188300000036, lat, lng, i);
-						kmDistance.push(km);
-					</script></tr>
-            <tr>
-               <td>Berlin Siegessäule</td>
-               <td>52.5145343</td>
-               <td>13.350118899999984</td>
-               <td id="distance5"></td><script>
-						var lat = 52.5145343;
-						var lng = 13.350118899999984;
-						var i = 5;
-						var km = distance(48.7678555, 9.825188300000036, lat, lng, i);
-						kmDistance.push(km);
-					</script></tr>
-         </table>
+      <div id="map" style="width: 50%; height: 100%;">
+         <p>Karte wird geladen...</p>
       </div>
-      <div id="distances">
-         <table border="1">
-            <thead>
-               <td>Distanzen sortiert</td>
-               <td>Kurse</td>
-            </thead><script>
-					kmDistance.sort(function(a, b){return a - b});	
-				</script><tr>
-               <td id="distance_sort1"></td>
-               <td id="kurs1"></td><script>
-						var lat = 48.7678555;
-						var lng = 9.825188300000036;
-						var i = 1;
-						distance_sort(48.7678555, 9.825188300000036, lat, lng, kmDistance, i);
-					</script></tr>
-            <tr>
-               <td id="distance_sort2"></td>
-               <td id="kurs2"></td><script>
-						var lat = 49.09648;
-						var lng = 10.461070000000063;
-						var i = 2;
-						distance_sort(48.7678555, 9.825188300000036, lat, lng, kmDistance, i);
-					</script></tr>
-            <tr>
-               <td id="distance_sort3"></td>
-               <td id="kurs3"></td><script>
-						var lat = 48.7835368;
-						var lng = 9.781901999999945;
-						var i = 3;
-						distance_sort(48.7678555, 9.825188300000036, lat, lng, kmDistance, i);
-					</script></tr>
-            <tr>
-               <td id="distance_sort4"></td>
-               <td id="kurs4"></td><script>
-						var lat = 48.84075409497385;
-						var lng = 10.066720502099543;
-						var i = 4;
-						distance_sort(48.7678555, 9.825188300000036, lat, lng, kmDistance, i);
-					</script></tr>
-            <tr>
-               <td id="distance_sort5"></td>
-               <td id="kurs5"></td><script>
-						var lat = 52.5145343;
-						var lng = 13.350118899999984;
-						var i = 5;
-						distance_sort(48.7678555, 9.825188300000036, lat, lng, kmDistance, i);
-					</script></tr>
-         </table>
+      <div id="info"><script>
+				var kmDistance = [];
+
+				function initialize(coords) {
+					var latlng = new google.maps.LatLng(coords.latitude, coords.longitude);
+					var myOptions = {zoom: 8, center: latlng, mapTypeId: google.maps.MapTypeId.ROADMAP};
+					var map = new google.maps.Map(document.getElementById("map"), myOptions);
+					var marker = new google.maps.Marker({position: latlng, map: map, title: "Hier sind wir"});
+				}
+
+				navigator.geolocation.getCurrentPosition(function(position) {
+					initialize(position.coords);
+				}, function() {
+					document.getElementById('aktuelle_pos').innerHTML = 'Deine aktuelle Position konnte nicht bestimmt werden.';
+				});
+
+				function distance(lat1, lng1, lat2, lng2, i) {
+					var pi80 = 3.14159265359 / 180;
+					lat1 *= pi80;
+					lng1 *= pi80;
+					lat2 *= pi80;
+					lng2 *= pi80;
+					var r = 6372.797; 
+					var dlat = lat2 - lat1;
+					var dlng = lng2 - lng1;
+					var a = Math.sin(dlat / 2) * Math.sin(dlat / 2) + Math.cos(lat1) * Math.cos(lng1) * Math.sin(dlng / 2) * Math.sin(dlng / 2);
+					var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+					var km = r * c;
+					document.getElementById('distance' + i.toString()).innerHTML = km.toFixed(2) + " km";
+					return km;
+				}
+
+				function distance_sort(lat1, lng1, lat2, lng2, kmDistance, i) {
+					document.getElementById('distance_sort' + i.toString()).innerHTML = kmDistance[i-1].toFixed(2) + " km";
+					var kurs = (Math.sin(lat2) - Math.sin(lat1) * Math.cos(kmDistance[i-1])) / (Math.cos(lat1) * Math.sin(kmDistance[i-1]));
+					//var kurs = Math.acos(Math.sin(lat1) * Math.sin(lat2) + Math.cos(lat1) * Math.cos(lat2) * Math.cos(lng2 - lng1));
+					kurs = Math.cos(kurs) * 100;
+					document.getElementById('kurs' + i.toString()).innerHTML = kurs.toFixed(2) + "°";
+				}
+			</script><div id="waypoints_info">
+            <table border="1" class="table">
+               <caption>Waypoints</caption>
+               <thead>
+                  <td>Name</td>
+                  <td>Längengrad</td>
+                  <td>Breitengrad</td>
+                  <td>Distanz</td>
+               </thead>
+               <tr>
+                  <td>Marcel Home</td>
+                  <td>48.7678555</td>
+                  <td>9.825188300000036</td>
+                  <td id="distance1"></td><script>
+							var lat = 48.7678555;
+							var lng = 9.825188300000036;
+							var i = 1;
+							var km = distance(48.84075409497385, 10.066720502099543, lat, lng, i);
+							kmDistance.push(km);
+						</script></tr>
+               <tr>
+                  <td>Anna Home</td>
+                  <td>49.09648</td>
+                  <td>10.461070000000063</td>
+                  <td id="distance2"></td><script>
+							var lat = 49.09648;
+							var lng = 10.461070000000063;
+							var i = 2;
+							var km = distance(48.84075409497385, 10.066720502099543, lat, lng, i);
+							kmDistance.push(km);
+						</script></tr>
+               <tr>
+                  <td>Nadja Home</td>
+                  <td>48.7835368</td>
+                  <td>9.781901999999945</td>
+                  <td id="distance3"></td><script>
+							var lat = 48.7835368;
+							var lng = 9.781901999999945;
+							var i = 3;
+							var km = distance(48.84075409497385, 10.066720502099543, lat, lng, i);
+							kmDistance.push(km);
+						</script></tr>
+               <tr>
+                  <td>Burren</td>
+                  <td>48.84075409497385</td>
+                  <td>10.066720502099543</td>
+                  <td id="distance4"></td><script>
+							var lat = 48.84075409497385;
+							var lng = 10.066720502099543;
+							var i = 4;
+							var km = distance(48.84075409497385, 10.066720502099543, lat, lng, i);
+							kmDistance.push(km);
+						</script></tr>
+               <tr>
+                  <td>Berlin Siegessäule</td>
+                  <td>52.5145343</td>
+                  <td>13.350118899999984</td>
+                  <td id="distance5"></td><script>
+							var lat = 52.5145343;
+							var lng = 13.350118899999984;
+							var i = 5;
+							var km = distance(48.84075409497385, 10.066720502099543, lat, lng, i);
+							kmDistance.push(km);
+						</script></tr>
+               <tr>
+                  <td>Tokio</td>
+                  <td>35.70</td>
+                  <td>139.767</td>
+                  <td id="distance6"></td><script>
+							var lat = 35.70;
+							var lng = 139.767;
+							var i = 6;
+							var km = distance(48.84075409497385, 10.066720502099543, lat, lng, i);
+							kmDistance.push(km);
+						</script></tr>
+            </table>
+         </div>
+         <div id="distances">
+            <table border="1" class="table">
+               <caption>Distanzen sortiert mit Kursen</caption>
+               <thead>
+                  <td>Distanz</td>
+                  <td>Kurs</td>
+               </thead><script>
+						kmDistance.sort(function(a, b){return a - b});	
+					</script><tr>
+                  <td id="distance_sort1"></td>
+                  <td id="kurs1"></td><script>
+							var lat = 48.7678555;
+							var lng = 9.825188300000036;
+							var i = 1;
+							distance_sort(48.84075409497385, 10.066720502099543, lat, lng, kmDistance, i);
+						</script></tr>
+               <tr>
+                  <td id="distance_sort2"></td>
+                  <td id="kurs2"></td><script>
+							var lat = 49.09648;
+							var lng = 10.461070000000063;
+							var i = 2;
+							distance_sort(48.84075409497385, 10.066720502099543, lat, lng, kmDistance, i);
+						</script></tr>
+               <tr>
+                  <td id="distance_sort3"></td>
+                  <td id="kurs3"></td><script>
+							var lat = 48.7835368;
+							var lng = 9.781901999999945;
+							var i = 3;
+							distance_sort(48.84075409497385, 10.066720502099543, lat, lng, kmDistance, i);
+						</script></tr>
+               <tr>
+                  <td id="distance_sort4"></td>
+                  <td id="kurs4"></td><script>
+							var lat = 48.84075409497385;
+							var lng = 10.066720502099543;
+							var i = 4;
+							distance_sort(48.84075409497385, 10.066720502099543, lat, lng, kmDistance, i);
+						</script></tr>
+               <tr>
+                  <td id="distance_sort5"></td>
+                  <td id="kurs5"></td><script>
+							var lat = 52.5145343;
+							var lng = 13.350118899999984;
+							var i = 5;
+							distance_sort(48.84075409497385, 10.066720502099543, lat, lng, kmDistance, i);
+						</script></tr>
+               <tr>
+                  <td id="distance_sort6"></td>
+                  <td id="kurs6"></td><script>
+							var lat = 35.70;
+							var lng = 139.767;
+							var i = 6;
+							distance_sort(48.84075409497385, 10.066720502099543, lat, lng, kmDistance, i);
+						</script></tr>
+            </table>
+         </div>
       </div>
    </body>
 </html>
