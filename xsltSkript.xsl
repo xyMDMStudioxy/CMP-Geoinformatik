@@ -53,11 +53,40 @@
 				}
 
 				function distance_sort(lat1, lng1, lat2, lng2, kmDistance, i) {
+					window.alert(lat2);
+					window.alert(lng2);
 					document.getElementById('distance_sort' + i.toString()).innerHTML = kmDistance[i-1].toFixed(2) + " km";
-					var kurs = (Math.sin(lat2) - Math.sin(lat1) * Math.cos(kmDistance[i-1])) / (Math.cos(lat1) * Math.sin(kmDistance[i-1]));
+					
+					lat1 = lat1 * Math.PI / 180;
+					lat2 = lat2 * Math.PI / 180;
+					lng1 = lng1 * Math.PI / 180;
+					lng2 = lng2 * Math.PI / 180;
+
+					var kurs = Math.acos(Math.sin(lat1) * Math.sin(lat2) + Math.cos(lat1) * Math.cos(lat2) * Math.cos(lng1 - lng2));
+					kurs = kurs * 180 / Math.PI;
+
+					/*var var1 = 52.517;
+					var1 = var1 * Math.PI / 180;
+					var var2 = 35.70;
+					var2 = var2 * Math.PI / 180;				
+					var var3 = 139.767;
+					var3 = var3 * Math.PI / 180;
+					var var4 = 13.40;
+					var4 = var4 * Math.PI / 180;*/
+
+					//var kurs = Math.acos(Math.sin(var1) * Math.sin(var2) + Math.cos(var1) * Math.cos(var2) * Math.cos(var3 - var4));
+					//kurs = kurs * 180 / Math.PI;
+
+					//var kurs = 52.517;
+					//lat1 = lat1 * Math.PI / 180;
+					
+					//kurs = Math.sin(kurs);
+					//var kurs = Math.atan((lat1 - lat2), (lng1 - lng2)) * 360 / Math.PI;
+					//var kurs = (Math.sin(lat2) - Math.sin(lat1) * Math.cos(kmDistance[i-1])) / (Math.cos(lat1) * Math.sin(kmDistance[i-1]));
 					//var kurs = Math.acos(Math.sin(lat1) * Math.sin(lat2) + Math.cos(lat1) * Math.cos(lat2) * Math.cos(lng2 - lng1));
-					kurs = Math.cos(kurs) * 100;
-					document.getElementById('kurs' + i.toString()).innerHTML = kurs.toFixed(2) + "°";
+					
+
+					document.getElementById('kurs' + i.toString()).innerHTML = kurs + "°";
 				}
 			</script>
 
@@ -117,8 +146,6 @@
 				</table>
 			</div>
 		</div>
-	
-		
 
 		</body>
 		</html>
