@@ -39,7 +39,7 @@
 				function distance(lat1, lng1, lat2, lng2, i) {
 					var pi80 = Math.PI / 180;
 					lat1 *= pi80;
-					lng1 *= pi80;
+					lng1 *= pi80;			
 					lat2 *= pi80;
 					lng2 *= pi80;
 					var r = 6372.797; 
@@ -91,7 +91,7 @@
 							var lat = <xsl:value-of select="$lat"/>;
 							var lng = <xsl:value-of select="$lng"/>;
 							var i = <xsl:value-of select="position()"/>;
-							var km = distance(48.84075409497385, 10.066720502099543, lat, lng, i);
+							km = distance(48.84075409497385, 10.066720502099543, lat, lng, i);
 							kmDistance.push(km);
 							berechne_kurs(48.84075409497385, 10.066720502099543, lat, lng);
 						</script>
